@@ -27,7 +27,9 @@ public class AgentCreator : MonoBehaviour
     {
         if (numberOfAgents <= maxAgentsNumber - 1)
         {
+            
             var newAgent = Instantiate(agent, transform.position, transform.rotation);
+            newAgent.name = ("Agent " + FindObjectsOfType<Agent>().Length);
             newAgent.transform.parent = gameObject.transform;
             Debug.Log(numberOfAgents);
 

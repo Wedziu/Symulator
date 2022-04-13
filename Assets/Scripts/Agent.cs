@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class Agent : MonoBehaviour
 {
    [SerializeField] Vector3 newPosition;
-    [SerializeField] float health = 3;
+    [SerializeField] public float health = 3;
     NavMeshAgent agentAI;
     // Start is called before the first frame update
     void Start()
