@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class Agent : MonoBehaviour
 {
    [SerializeField] Vector3 newPosition;
+    [SerializeField] float health = 3;
     NavMeshAgent agentAI;
     // Start is called before the first frame update
     void Start()
@@ -13,17 +14,22 @@ public class Agent : MonoBehaviour
         NewPosition();
         MoveToNewPosition();
     }
+    void LateUpdate()
+    {
+        CheckPosition();
+        AgentDestroy();
+    }
     void CheckPosition()
     {
 
         if (agentAI.transform.position != newPosition) return;
         MoveToNewPosition();
-        Debug.Log("CheckPosition");
+        
     }
 
     private void NewPosition()
     {
-        newPosition = new Vector3(Random.Range(-29, 29), 1.04f, Random.Range(-29f, 29f));
+        newPosition = new Vector3(Random.Range(-19, 19), 1.04f, Random.Range(-19f, 19f));
     }
 
     private void MoveToNewPosition()
@@ -34,9 +40,18 @@ public class Agent : MonoBehaviour
             
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    private void OnTriggerEnter(Collider other)
     {
-        CheckPosition();
+        health--;
+        Debug.Log("I Hit something!");
+    }
+
+    void AgentDestroy()
+    {
+        if(health<=0)
+        {
+            Debug.Log("I'm dead!");
+            Destroy(gameObject);
+        }
     }
 }

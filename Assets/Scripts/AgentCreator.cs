@@ -6,6 +6,8 @@ public class AgentCreator : MonoBehaviour
 {
     [SerializeField] GameObject agent;
     [SerializeField] float timeBetweenSpawn = 3;
+    [SerializeField] float numberOfAgents;
+    [SerializeField] float maxAgentsNumber = 30;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,21 +15,29 @@ public class AgentCreator : MonoBehaviour
     }
     IEnumerator SpawnCountDown()
     {
+        numberOfAgents = FindObjectsOfType<Agent>().Length;
         while (true)
         {
             yield return new WaitForSeconds(timeBetweenSpawn);
             SpawnAgent();
+
         }
-        
     }
     void SpawnAgent()
     {
-        Instantiate(agent, transform.position, transform.rotation);
+        if (numberOfAgents <= maxAgentsNumber - 1)
+        {
+            var newAgent = Instantiate(agent, transform.position, transform.rotation);
+            newAgent.transform.parent = gameObject.transform;
+            Debug.Log(numberOfAgents);
+
+            Debug.Log("I Spawned!");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        numberOfAgents = FindObjectsOfType<Agent>().Length;
     }
 }
