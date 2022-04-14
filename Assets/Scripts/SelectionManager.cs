@@ -6,6 +6,7 @@ public class SelectionManager : MonoBehaviour
 {
     [SerializeField] Material selectedMaterial;
     [SerializeField] Material defaultMaterial;
+    [SerializeField] TextMeshProUGUI currentNumberOfAgents;
     [SerializeField] TextMeshProUGUI nameOfAgent;
     [SerializeField] TextMeshProUGUI health;
     Transform _selection;
@@ -15,11 +16,12 @@ public class SelectionManager : MonoBehaviour
     {
         nameOfAgent.text = ("No Agent Selected");
         health.text = ("No Agent Selected");
+        currentNumberOfAgents.text = ("No Agents on map");
     }
     void Update()
     {
         SelectAnAgent();
-        
+        currentNumberOfAgents.text = ("Current number of Agents - " + FindObjectsOfType<Agent>().Length);
     }
 
     private void SelectAnAgent()
@@ -64,6 +66,8 @@ public class SelectionManager : MonoBehaviour
         foreach (var agents in agent)
         {
             agents.GetComponent<MeshRenderer>().material = defaultMaterial;
+            nameOfAgent.text = ("No Agent Selected");
+            health.text = ("No Agent Selected");
         }
     }
 
