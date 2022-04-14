@@ -44,6 +44,7 @@ public class Agent : MonoBehaviour
     {
         health--;
         Debug.Log("I Hit something!");
+        GetComponent<AudioSource>().Play();
     }
     
 
