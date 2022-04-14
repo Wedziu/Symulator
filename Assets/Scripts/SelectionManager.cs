@@ -9,7 +9,7 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameOfAgent;
     [SerializeField] TextMeshProUGUI health;
     Transform _selection;
-
+    
 
     private void Start()
     {
@@ -19,6 +19,7 @@ public class SelectionManager : MonoBehaviour
     void Update()
     {
         SelectAnAgent();
+        
     }
 
     private void SelectAnAgent()
@@ -27,6 +28,8 @@ public class SelectionManager : MonoBehaviour
         {
             var selectionRenderer = _selection.GetComponent<Renderer>();
             selectionRenderer.material = defaultMaterial;
+            
+
             _selection = null;
             nameOfAgent.text = ("No Agent Selected");
             health.text = ("No Agent Selected");
@@ -55,5 +58,13 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    
+    public void ClearAllAgentsMaterial()
+    {
+        var agent = FindObjectsOfType<Agent>();
+        foreach (var agents in agent)
+        {
+            agents.GetComponent<MeshRenderer>().material = defaultMaterial;
+        }
+    }
+
 }
