@@ -5,7 +5,9 @@ using UnityEngine;
 public class AgentCreator : MonoBehaviour
 {
     [SerializeField] GameObject agent;
-    [SerializeField] float timeBetweenSpawn = 3;
+    [SerializeField] float minTimeBetweenSpawn = 2;
+    [SerializeField] float maxTimeBetweenSpawn = 10;
+    [SerializeField] float timeBetweenSpawn;
     [SerializeField] float numberOfAgents;
     [SerializeField] float maxAgentsNumber = 30;
     // Start is called before the first frame update
@@ -18,7 +20,9 @@ public class AgentCreator : MonoBehaviour
         numberOfAgents = FindObjectsOfType<Agent>().Length;
         while (true)
         {
+            timeBetweenSpawn = Random.Range(minTimeBetweenSpawn, maxTimeBetweenSpawn);
             yield return new WaitForSeconds(timeBetweenSpawn);
+            
             SpawnAgent();
 
         }

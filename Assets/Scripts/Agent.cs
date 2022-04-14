@@ -45,6 +45,7 @@ public class Agent : MonoBehaviour
         health--;
         Debug.Log("I Hit something!");
     }
+    
 
     void AgentDestroy()
     {

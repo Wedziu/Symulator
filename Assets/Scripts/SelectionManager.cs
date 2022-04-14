@@ -36,6 +36,9 @@ public class SelectionManager : MonoBehaviour
             nameOfAgent.text = ("No Agent Selected");
             health.text = ("No Agent Selected");
         }
+
+
+
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
@@ -51,7 +54,7 @@ public class SelectionManager : MonoBehaviour
                         {
                             selectionRenderer.material = selectedMaterial;
                             nameOfAgent.text = hit.transform.name;
-                            health.text = hit.transform.GetComponent<Agent>().health.ToString();
+                            health.text = ("Health = " + hit.transform.GetComponent<Agent>().health.ToString());
                         }
                     }
                     _selection = selection;
